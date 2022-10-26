@@ -3,6 +3,8 @@ const { sequelize } = require('./database/db');
 const PORT = 3000;
 
 require('./models/User');
+require('./models/Publication');
+require('./models/Image');
 
 (async () => {
     try{

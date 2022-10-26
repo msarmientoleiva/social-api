@@ -1,6 +1,6 @@
 const { Sequelize, authenticate, close } = require('sequelize');
 
-const sequelize = new Sequelize('postgres://postgres:1234@localhost:5432/social')
+const sequelize = new Sequelize('postgres://postgres:1234@localhost:5432/social', { logging: false });
 
 const testConnection = async () => {
     try {

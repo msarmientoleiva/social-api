@@ -1,17 +1,18 @@
 const { sequelize } = require('../database/db');
 const { DataTypes } = require('sequelize');
+const Publication = require('./Publication');
 
-const User = sequelize.define('user', {
+const User = sequelize.define('users', {
     id: {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
     },
-    firstName: {
+    first_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    lastName: {
+    last_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -24,6 +25,12 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false,
     }
+});
+
+User.hasMany(Publication, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
 })
 
 module.exports = User;
