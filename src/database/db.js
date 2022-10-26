@@ -16,4 +16,5 @@ const closeConnection = () => close();
 module.exports = {
     testConnection, 
     closeConnection,
+    sequelize,
 }
