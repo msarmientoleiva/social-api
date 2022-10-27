@@ -8,7 +8,7 @@ require('./models/Image');
 
 (async () => {
     try{
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
     }
     catch(error){
         console.log(error);
