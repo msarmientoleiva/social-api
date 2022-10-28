@@ -22,4 +22,39 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        const { first_name, last_name, email, password } = req.body;
+        await User.update({
+            first_name,
+            last_name,
+            email,
+            password
+        },
+        {
+            where:{ id }
+        });
+        res.status(200).json({
+            message: 'User was successfully updated'
+        })
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
+
+router.delete('/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await User.destroy({
+            where: { id }
+        });
+        res.status(200).json({
+            message: 'User deleted succesfully'
+        })
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+})
+
 module.exports = router;
