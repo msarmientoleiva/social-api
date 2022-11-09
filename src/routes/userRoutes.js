@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { first_name, last_name, email, password } = req.body;
@@ -32,9 +32,9 @@ router.put('/:id', async(req, res) => {
             email,
             password
         },
-        {
-            where:{ id }
-        });
+            {
+                where: { id }
+            });
         res.status(200).json({
             message: 'User was successfully updated'
         })
@@ -43,7 +43,7 @@ router.put('/:id', async(req, res) => {
     }
 });
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         await User.destroy({
@@ -51,6 +51,18 @@ router.delete('/:id', async(req, res) => {
         });
         res.status(200).json({
             message: 'User deleted succesfully'
+        })
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+})
+
+router.patch('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await User.update({ status: false }, { where: { id } })
+        res.status(200).json({
+            message: 'User disabled successfully'
         })
     } catch (error) {
         res.status(500).json({ error });
